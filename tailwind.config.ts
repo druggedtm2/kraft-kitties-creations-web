@@ -64,9 +64,9 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				kraft: {
-					primary: '#ea384c',
-					secondary: '#FDE1D3',
-					tertiary: '#64745E', // olive/moss green
+					primary: 'var(--primary, #ea384c)',
+					secondary: 'var(--secondary, #FDE1D3)',
+					tertiary: 'var(--tertiary, #64745E)',
 					dark: '#333333',
 					light: '#F8F5F2'
 				}
@@ -116,13 +116,33 @@ export default {
 						opacity: '0',
 						transform: 'translateY(10px)'
 					}
+				},
+				'color-change': {
+					'0%': { backgroundColor: 'var(--start-color)' },
+					'100%': { backgroundColor: 'var(--end-color)' }
+				},
+				'pulse-light': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.7s ease-out',
-				'fade-out': 'fade-out 0.7s ease-out'
+				'fade-out': 'fade-out 0.7s ease-out',
+				'color-change': 'color-change 2s ease-in-out infinite alternate',
+				'pulse-light': 'pulse-light 2s infinite ease-in-out',
+				'float': 'float 3s ease-in-out infinite',
+				'spin-slow': 'spin-slow 8s linear infinite'
 			}
 		}
 	},

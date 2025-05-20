@@ -9,6 +9,7 @@ import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
+import ThemeSwitcher from '../components/ThemeSwitcher';
 
 // Import the animation observer
 import AnimationObserver from '../components/AnimationObserver';
@@ -31,6 +32,7 @@ const Index = () => {
       </AnimationObserver>
       <Footer />
       <ScrollToTop />
+      <ThemeSwitcher />
     </div>
   );
 };
