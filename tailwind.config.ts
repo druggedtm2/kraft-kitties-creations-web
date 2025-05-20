@@ -117,6 +117,10 @@ export default {
 						transform: 'translateY(10px)'
 					}
 				},
+				'theme-fade': {
+					'0%': { opacity: '0.7' },
+					'100%': { opacity: '1' }
+				},
 				'color-change': {
 					'0%': { backgroundColor: 'var(--start-color)' },
 					'100%': { backgroundColor: 'var(--end-color)' }
@@ -139,6 +143,7 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.7s ease-out',
 				'fade-out': 'fade-out 0.7s ease-out',
+				'theme-fade': 'theme-fade 0.5s ease-out',
 				'color-change': 'color-change 2s ease-in-out infinite alternate',
 				'pulse-light': 'pulse-light 2s infinite ease-in-out',
 				'float': 'float 3s ease-in-out infinite',

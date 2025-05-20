@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -66,6 +65,18 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-merriweather;
   }
+  
+  /* Explicitly set all elements with theme colors to use CSS transitions */
+  .section-title::after,
+  .collection-title svg,
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .nav-link.active::after,
+  .testimonial-quote,
+  .process-step-icon {
+    transition: all 0.5s ease-in-out;
+  }
 }
 
 @layer components {
@@ -94,17 +105,14 @@
   
   .btn-primary {
     @apply bg-kraft-primary text-white px-6 py-3 rounded hover:bg-opacity-90 transition-all font-medium inline-flex items-center;
-    transition: background-color 0.3s ease-in-out;
   }
   
   .btn-secondary {
     @apply bg-kraft-secondary text-kraft-dark px-6 py-3 rounded hover:bg-opacity-90 transition-all font-medium inline-flex items-center;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
   
   .btn-outline {
     @apply border-2 border-kraft-primary text-kraft-primary px-6 py-3 rounded hover:bg-kraft-primary hover:text-white transition-all font-medium inline-flex items-center;
-    transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   }
   
   .product-card {
@@ -172,12 +180,16 @@
     @apply py-16 md:py-24;
   }
   
-  /* Theme transition classes */
-  .theme-transition {
-    transition: background-color 0.5s ease-in-out, 
-                color 0.5s ease-in-out, 
-                border-color 0.5s ease-in-out,
-                box-shadow 0.5s ease-in-out;
+  /* Theme transition classes - applied to ALL themed elements */
+  .theme-transition,
+  [class*="kraft-"],
+  [class*="text-kraft-"],
+  [class*="bg-kraft-"],
+  [class*="border-kraft-"],
+  [class*="hover:bg-kraft-"],
+  [class*="hover:text-kraft-"],
+  [class*="hover:border-kraft-"] {
+    transition: all 0.5s ease-in-out !important;
   }
 }
 
@@ -205,3 +217,13 @@
 .product-card:nth-child(4) { animation-delay: 0.4s; }
 .product-card:nth-child(5) { animation-delay: 0.5s; }
 .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Theme appearance/disappearance animation */
+@keyframes themeTransition {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.theme-transition-active {
+  animation: themeTransition 0.5s ease-in-out;
+}

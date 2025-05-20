@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Palette } from 'lucide-react';
 import { Button } from './ui/button';
+import { toast } from "@/components/ui/use-toast";
 
-// Define theme options
+// Define theme options with consistent color formats
 const themes = [
   { name: 'default', label: 'Classic', primary: '#ea384c', secondary: '#FDE1D3', tertiary: '#64745E' },
   { name: 'lavender', label: 'Lavender', primary: '#8B5CF6', secondary: '#E5DEFF', tertiary: '#514A7E' },
@@ -16,6 +17,11 @@ const ThemeSwitcher = () => {
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
+  // Apply the default theme on initial load
+  useEffect(() => {
+    applyTheme(themes[currentThemeIndex]);
+  }, []);
+
   const cycleTheme = () => {
     const nextIndex = (currentThemeIndex + 1) % themes.length;
     setCurrentThemeIndex(nextIndex);
@@ -24,17 +30,38 @@ const ThemeSwitcher = () => {
     // Show tooltip with theme name
     setIsTooltipVisible(true);
     setTimeout(() => setIsTooltipVisible(false), 2000);
+    
+    // Show toast notification
+    toast({
+      title: "Theme Changed",
+      description: `Switched to ${themes[nextIndex].label} theme`,
+      duration: 2000,
+    });
   };
 
   const applyTheme = (theme: typeof themes[0]) => {
-    // Update CSS variables
+    // Store the theme colors as CSS custom properties
     document.documentElement.style.setProperty('--primary', theme.primary);
     document.documentElement.style.setProperty('--secondary', theme.secondary);
     document.documentElement.style.setProperty('--tertiary', theme.tertiary);
-
-    // Update colors in the HSL format that Tailwind uses
+    
+    // Update Tailwind CSS HSL variables for the theme
     updateHSLVariable('--primary', theme.primary);
     updateHSLVariable('--secondary', theme.secondary);
+    
+    // Update animation variables
+    const primaryRgba = hexToRgba(theme.primary, 0.1);
+    const primaryRgbaEnd = hexToRgba(theme.primary, 0.2);
+    document.documentElement.style.setProperty('--start-color', primaryRgba);
+    document.documentElement.style.setProperty('--end-color', primaryRgbaEnd);
+    
+    // Add a theme class to the document for additional styling
+    document.documentElement.className = `theme-${theme.name}`;
+    
+    // Force a repaint to ensure the theme changes are applied
+    const resizeEvent = window.document.createEvent('UIEvents');
+    resizeEvent.initUIEvent('resize', true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
   };
 
   // Convert hex to HSL for Tailwind CSS variables
@@ -60,12 +87,20 @@ const ThemeSwitcher = () => {
       h *= 60;
     }
     
-    // Update the CSS variable with correct HSL format
+    // Format HSL values for CSS variables
     const hue = Math.round(h);
     const saturation = Math.round(s * 100);
     const lightness = Math.round(l * 100);
     
     document.documentElement.style.setProperty(`${cssVar}`, `${hue} ${saturation}% ${lightness}%`);
+  };
+  
+  // Convert hex to rgba for animation variables
+  const hexToRgba = (hex: string, alpha: number): string => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   };
 
   return (
