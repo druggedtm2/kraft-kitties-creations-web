@@ -10,6 +10,9 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
+// Import the animation observer
+import AnimationObserver from '../components/AnimationObserver';
+
 const Index = () => {
   useEffect(() => {
     document.title = "Kraft Kitties - Handmade Gifts & Custom Art";
@@ -19,11 +22,13 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <About />
-      <Collections />
-      <OrderProcess />
-      <Testimonials />
-      <Contact />
+      <AnimationObserver>
+        <About />
+        <Collections />
+        <OrderProcess />
+        <Testimonials />
+        <Contact />
+      </AnimationObserver>
       <Footer />
       <ScrollToTop />
     </div>

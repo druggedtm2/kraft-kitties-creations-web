@@ -11,7 +11,7 @@ interface ProductCardProps {
 const ProductCard = ({ image, title, subtitle }: ProductCardProps) => {
   return (
     <div className="product-card group">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-lg">
         <img 
           src={image} 
           alt={title} 
@@ -23,7 +23,7 @@ const ProductCard = ({ image, title, subtitle }: ProductCardProps) => {
               href="https://www.instagram.com/kraft_kitties_/" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center justify-center w-full bg-white text-kraft-primary py-2 px-4 rounded"
+              className="flex items-center justify-center w-full bg-white text-kraft-primary py-2 px-4 rounded hover:bg-kraft-primary hover:text-white transition-all duration-300"
             >
               <Instagram size={18} className="mr-2" />
               DM for Price & Details
@@ -38,10 +38,12 @@ const ProductCard = ({ image, title, subtitle }: ProductCardProps) => {
           href="https://www.instagram.com/kraft_kitties_/" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="product-link flex items-center"
+          className="product-link flex items-center group"
         >
-          Contact for Details
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span className="relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-kraft-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left">
+            Contact for Details
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
         </a>

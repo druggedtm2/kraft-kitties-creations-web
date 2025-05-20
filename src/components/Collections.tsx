@@ -1,9 +1,47 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Heart, Gift, PaintRoller } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 const Collections = () => {
+  const collectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Find all product cards in this collection
+          const productCards = entry.target.querySelectorAll('.product-card');
+          
+          // Add animation classes with staggered delays
+          productCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate-fade-in');
+              card.classList.remove('opacity-0');
+            }, index * 150); // 150ms staggered delay
+          });
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    // Observe all collection sections
+    collectionRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section id="collections" className="section-padding">
       <div className="container mx-auto px-4">
@@ -11,7 +49,7 @@ const Collections = () => {
         <p className="text-center text-gray-600 mb-12">Browse what we make or consider what we could create specifically for you.</p>
         
         {/* Crochet Bouquets */}
-        <div className="mb-20">
+        <div className="mb-20" ref={el => collectionRefs.current[0] = el}>
           <h3 className="collection-title">
             <Heart />
             Crochet Bouquets
@@ -40,7 +78,7 @@ const Collections = () => {
         </div>
         
         {/* Ribbon Bouquets */}
-        <div className="mb-20">
+        <div className="mb-20" ref={el => collectionRefs.current[1] = el}>
           <h3 className="collection-title">
             <Gift />
             Ribbon Bouquets
@@ -69,7 +107,7 @@ const Collections = () => {
         </div>
         
         {/* Crochet Plushies */}
-        <div className="mb-20">
+        <div className="mb-20" ref={el => collectionRefs.current[2] = el}>
           <h3 className="collection-title">
             <Heart />
             Crochet Plushies
@@ -92,7 +130,7 @@ const Collections = () => {
         </div>
         
         {/* Personalized Glass Paintings */}
-        <div className="mb-20">
+        <div className="mb-20" ref={el => collectionRefs.current[3] = el}>
           <h3 className="collection-title">
             <PaintRoller />
             Personalized Glass Paintings
@@ -127,7 +165,7 @@ const Collections = () => {
         </div>
         
         {/* Unique Custom Orders */}
-        <div>
+        <div ref={el => collectionRefs.current[4] = el}>
           <h3 className="collection-title">
             <Gift />
             Unique Custom Orders

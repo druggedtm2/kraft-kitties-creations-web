@@ -6,38 +6,38 @@ const OrderProcess = () => {
   const steps = [
     {
       id: 1,
-      title: "Consider What You Want",
-      description: "Look through our work or think about what you'd like to have made. Consider colors, subject matter, and general style.",
+      title: "Envision Your Perfect Piece",
+      description: "Browse our collections or imagine your ideal custom creation. Consider colors, styles, and specific elements that resonate with you or your recipient.",
       icon: <Search size={24} />
     },
     {
       id: 2,
-      title: "Send a Message",
-      description: "Contact @kraft_kitties_ on Instagram with your request. Include reference photos if you have them.",
+      title: "Reach Out",
+      description: "Message us on Instagram @kraft_kitties_ with your ideas. Include any reference photos or inspiration to help us understand your vision.",
       icon: <MessageSquare size={24} />
     },
     {
       id: 3,
-      title: "Review Details Together",
-      description: "We'll discuss your request, clarify any questions, provide pricing, and establish a timeline.",
+      title: "Refine Your Request",
+      description: "We'll collaborate to perfect your design, discuss materials, answer questions, establish pricing, and set a realistic timeline.",
       icon: <FileText size={24} />
     },
     {
       id: 4,
-      title: "Confirm With Payment",
-      description: "Once you're satisfied with the plan, complete payment (details provided in our conversation) to begin work.",
+      title: "Confirm & Begin",
+      description: "Once you're happy with the plan, complete your payment (details provided during our conversation) to reserve your spot in our creation queue.",
       icon: <CreditCard size={24} />
     },
     {
       id: 5,
-      title: "Creation Process",
-      description: "Your item is made with care and attention to the details we've discussed.",
+      title: "Crafting With Care",
+      description: "Your piece comes to life as we meticulously craft each element, ensuring quality and attention to the details that matter to you.",
       icon: <PaintRoller size={24} />
     },
     {
       id: 6,
-      title: "Delivery Options",
-      description: "We'll arrange pickup or delivery in Ranchi, or discuss shipping for locations beyond our immediate area.",
+      title: "Delivery To You",
+      description: "We'll coordinate convenient pickup or delivery in Ranchi, or arrange shipping options for those beyond our local area.",
       icon: <Package size={24} />
     }
   ];
@@ -45,32 +45,40 @@ const OrderProcess = () => {
   return (
     <section id="ordering" className="section-padding bg-kraft-secondary bg-opacity-30">
       <div className="container mx-auto px-4">
-        <h2 className="section-title">Simple Ordering Process</h2>
-        <p className="text-center text-gray-600 mb-12">Getting your custom piece from Kraft Kitties works like this:</p>
+        <h2 className="section-title">How Your Custom Creation Happens</h2>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">From initial spark to finished piece, here's our simple six-step journey to bringing your vision to life:</p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {steps.map((step) => (
-            <div className="process-step" key={step.id}>
-              <div className="process-step-icon">
+            <div 
+              className="process-step group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1" 
+              key={step.id}
+            >
+              <div className="process-step-icon group-hover:bg-kraft-primary group-hover:text-white transition-all duration-300">
                 {step.icon}
               </div>
               <div>
-                <div className="process-step-number">{step.id}. {step.title}</div>
+                <div className="process-step-number group-hover:text-kraft-primary transition-colors duration-300">
+                  {step.id}. {step.title}
+                </div>
                 <p>{step.description}</p>
               </div>
             </div>
           ))}
         </div>
         
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <a 
             href="https://www.instagram.com/kraft_kitties_/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="btn-primary inline-flex items-center"
+            className="btn-primary inline-flex items-center group px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
-            <MessageSquare size={18} className="mr-2" />
-            Contact to Begin
+            <MessageSquare size={20} className="mr-2" />
+            Start Your Custom Order
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </div>
       </div>
